@@ -5,15 +5,14 @@ public class AnimationEnnemy : MonoBehaviour {
 
 	public bool walk = false;
 
-	private Animator animator;
-
-	void Start() {
-		animator = GetComponent<Animator> ();
-	}
+	public Animator animator;
 
 	void OnTriggerEnter(Collider col) {
 		if (col.tag == "Player") {
 			animator.SetBool ("HighKick", true);
+		}
+		if (col.name == "Capsule") {
+			animator.enabled = false;
 		}
 	}
 
@@ -21,11 +20,17 @@ public class AnimationEnnemy : MonoBehaviour {
 		if (col.tag == "Player") {
 			animator.SetBool ("HighKick", true);
 		}
+		if (col.name == "Capsule") {
+			animator.enabled = false;
+		}
 	}
 
 	void OnTriggerExit(Collider col) {
 		if (col.tag == "Player") {
 			animator.SetBool ("HighKick", false);
+		}
+		if (col.name == "Capsule") {
+			animator.enabled = true;
 		}
 	}
 
